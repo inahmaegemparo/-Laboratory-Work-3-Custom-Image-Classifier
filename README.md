@@ -1,5 +1,10 @@
 # Laboratory Work 3 | Custom Image Classifier
 
+# Google Collab
+
+[CLICK HERE TO VIEW THE COLLAB](https://colab.research.google.com/drive/1_OII1G63TI00tIsbKt_eJXzeT9ZPN_Fe?usp=sharing).
+
+
 ## Guide Questions (Student Reflection & Explanation)
 
 1. Dataset Preparation
