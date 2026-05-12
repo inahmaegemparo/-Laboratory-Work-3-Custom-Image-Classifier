@@ -1,1 +1,1 @@
-# Laboratory Work 3 - Merged Data, DAX, and DAX Function Insights
+# Laboratory Work 3 | Custom Image Classifier
