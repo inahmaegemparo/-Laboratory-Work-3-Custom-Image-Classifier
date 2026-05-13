@@ -11,49 +11,60 @@
 
 1.1 How did you organize your dataset in Google Drive?
 
-I collected 20 different medicinal plant with 250 pictures each category as per instructed. I then upload it in the google drive using the format provided. The folder named as IMAGEDATASET, and inside that folder is also the folders of 20 categories with their corresponding images inside.
+Following the instructions provided, I assembled a dataset of 20 distinct medicinal plant species, capturing 250 images for each category. I organized these into a main directory titled ImageDataset on Google Drive, with each of the 20 classes stored in its own dedicated subfolder to ensure proper formatting for the model
+
 1.2 Why is folder structure important for TensorFlow image loading?
 
-It is important because TensorFlow uses the folder structure as an automatic labeling system. By placing images into named subfolders, the software instantly knows which category each image belongs to without needing a separate list or spreadsheet. This organized layout also allows the computer to load images in small, manageable batches, making the training process faster and preventing your memory from overloading.
+This structure is essential because TensorFlow leverages the directory hierarchy as an automated labeling mechanism. By categorizing images into named subfolders, the framework dynamically assigns labels to each image, eliminating the need for manual spreadsheets or external metadata. Furthermore, this organized arrangement facilitates efficient batch loading, which accelerates the training process and prevents system memory exhaustion.
+
 2. Model Training
 
 2.1 What is the role of convolutional layers in image classification?
 
-Convolutional layers act as automated feature detectors that scan an image to identify patterns. In the beginning layers, they find simple edges and textures; as the data moves deeper, these layers combine those simple shapes to recognize complex features like eyes, wheels, or leaves. By sliding small filters across the pixels, they preserve the spatial relationship between parts of the image, allowing the model to understand what an object looks like regardless of where it appears in the frame.
+Convolutional layers function as autonomous feature extractors that systematically scan an image to detect specific patterns. The initial layers focus on low-level details, such as edges, gradients, and textures. As the data progresses through deeper layers, the model aggregates these basic shapes to identify more sophisticated structures, such as the specific ribbing of a leaf or the unique contour of a petal. By convolving small filters (kernels) across the pixel grid, these layers maintain the spatial hierarchy of the data, enabling the network to recognize an object’s characteristics regardless of its orientation or position within the frame.
+
 2.2 Why do we split data into training and validation sets?
 
-Spliting data is ensuring the model to actually learns instead of just memorizing. The training set is like a practice exam where the model sees the answers and learns the patterns, while the validation set acts as a mock test with data it hasn't seen before. This separation allows to catch overfitting, which happens when a model performs perfectly on its practice work but fails in the real world. By checking performance on the validation set, it can tune the model's settings and confidently predict how it will handle entirely new images once it's deployed.
+Splitting the dataset is a critical step to ensure the model develops generalization capabilities rather than simply memorizing the input data. This division is the primary defense against overfitting—a scenario where a model excels at identifying its training photos but fails to categorize new images. By monitoring validation performance, developers can fine-tune hyperparameters and ensure the model will remain accurate when deployed in real-world scenarios.
+
 3. Performance Analysis
 
 3.1 What accuracy did your model achieve?
 
-My model achieved a validation accuracy of approximately 61.7% (0.6169999837875366). This means the model correctly identified the images in the validation set about 62% of the time.
+My model achieved a validation accuracy of 52.1% (0.5210) as shown in the evaluation step and the final training epoch.
+
 3.2 How did the number of images affect the model’s performance?
 
 The number of images acted as the foundation for how well the model could generalize.
+
 4. Critical Thinking
 
 4.1 What challenges did you encounter while using your own dataset?
 
-It's the testing part, some plants won't accurately or 99 percentage detect its name upon testing.
+The main challenge was high overfitting in the initial model. In Part 3, while training accuracy reached nearly 99.7%, the validation accuracy was stuck at 52.1%, and the validation loss was actually increasing (rising to 2.86), indicating the model was just memorizing the training photos.
+
 4.2 How can data augmentation improve your model?
 
 Data augmentation improves your model by artificially creating variety from your existing images, which prevents the network from simply memorizing specific photos. By applying random transformations like rotations, flips, and zooms during training, the model is forced to focus on the actual features of the plants such as leaf shape and texture rather than getting distracted by specific angles or lighting conditions.
+
 5. Application
 
 5.1 Suggest a real-world application for your trained model.
 
 A real-world application for my model is a Mobile Field Guide for Community Health Workers, which allows users to instantly identify medicinal plants using a smartphone camera. In rural areas where access to pharmacies is limited, this tool provides local health volunteers and residents with an accurate way to verify plant species for traditional remedies, such as treating coughs or skin ailments. By confirming the correct plant ID on the spot, the application ensures that traditional medicine is used safely and effectively while preventing the dangerous misuse of toxic "look-alike" species.
+
 5.2 How can this system be integrated into a mobile or web application?
 
 To integrate this system, I would first convert my trained model into TensorFlow Lite for mobile or TensorFlow.js for web use to ensure it runs efficiently on consumer devices. For a mobile app, the model would be embedded directly into the application, allowing health workers to identify plants offline by simply using their phone’s camera. For a web-based approach, I can use a Flask or FastAPIbackend to create an API that receives uploaded images, processes them through the model, and returns the identification results and medicinal instructions to a user- friendly interface built with HTML and JavaScript.
+
 Guide Questions (Student Explanation & Reflection)
 
 Visualization & Overfitting
 
 What signs indicated overfitting in your first model?
 
-The primary indicator was the large gap between training and validation accuracy. While training accuracy climbed toward 100%, the validation accuracy plateaued much lower. Additionally, the Validation Loss began to rise sharply after a few epochs, showing the model was memorizing specific pixels rather than learning general features.
+The plots in Part 3 show a clear "divergence." The Training Loss dropped close to 0, while the Validation Loss started increasing after epoch 3. Similarly, Training Accuracy hit nearly 100%, but Validation Accuracy plateaued near 50%.
+
 How did data augmentation affect validation accuracy?
 
 Data augmentation helped the validation accuracy align more closely with training accuracy. Although it made the "training phase" harder, it prevented the validation score from crashing or fluctuating, resulting in a more stable and reliable performance on unseen data.
@@ -70,6 +81,7 @@ Performance Comparison
 Compare accuracy before and after improvements.
 
 Before improvements, the model had a high training accuracy but a failing validation score due to overfitting. After improvements, the training and validation accuracies are synchronized, reaching approximately 61.7%. This represents "honest" accuracy that will hold up in real-world use.
+
 Which technique contributed most to improvement?
 
 Data Augmentation contributed the most. It directly addressed the limited variety in the original 5,000 images by creating infinite variations, which was the key to stopping the validation loss from exploding.
